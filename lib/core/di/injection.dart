@@ -1,5 +1,8 @@
-import 'package:health_duel/core/di/core_module.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:get_it/get_it.dart';
+import 'package:health_duel/core/di/core_module.dart';
+import 'package:health_duel/features/auth/di/auth_module.dart';
+import 'package:health_duel/core/config/firebase_options.dart';
 
 /// GetIt instance - Service Locator for Dependency Injection
 final getIt = GetIt.instance;
@@ -11,10 +14,7 @@ final getIt = GetIt.instance;
 ///
 /// Order of initialization:
 /// 1. Core infrastructure (Storage, Network, Security)
-/// 2. Data sources (Local and Remote)
-/// 3. Repositories (Domain interfaces implementation)
-/// 4. Use cases (Business logic)
-/// 5. Bloc/State management
+/// 2. Feature modules (Auth, etc.)
 ///
 /// Usage:
 /// ```dart
@@ -22,28 +22,27 @@ final getIt = GetIt.instance;
 ///   WidgetsFlutterBinding.ensureInitialized();
 ///   AppConfig.init(Environment.dev);
 ///   await initializeDependencies();
-///   runApp(const FinTrackApp());
+///   runApp(const HealthDuelApp());
 /// }
 /// ```
 Future<void> initializeDependencies() async {
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
   // 1. Initialize Core Infrastructure (Storage, Network, Security)
   await registerCoreModule();
 
   // Wait for all async registrations to complete
   await getIt.allReady();
 
-  // TODO: Phase 3 - Register Feature Modules
-  // 2. Register Data Sources
-  // _registerDataSources();
+  // 2. Register Feature Modules
+  // Auth feature: data sources, repositories, use cases
+  registerAuthModule();
 
-  // 3. Register Repositories
-  // _registerRepositories();
-
-  // 4. Register Use Cases
-  // _registerUseCases();
-
-  // 5. Register Blocs
-  // _registerBlocs();
+  // TODO: Phase 4+ - Register additional feature modules
+  // registerDuelsModule();
+  // registerProfileModule();
 }
 
 /// Reset all dependencies (mainly for testing)

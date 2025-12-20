@@ -1,6 +1,6 @@
+import 'package:flutter/material.dart';
 import 'package:health_duel/core/config/config.dart';
 import 'package:health_duel/core/di/injection.dart';
-import 'package:flutter/material.dart';
 
 import 'app.dart';
 
@@ -13,5 +13,5 @@ void main() async {
   // Initialize dependency injection
   await initializeDependencies();
 
-  runApp(const FinTrackApp());
+  runApp(const HealthDuelApp());
 }
