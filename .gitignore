@@ -18,11 +18,6 @@ migrate_working_dir/
 *.iws
 .idea/
 
-# VS Code related
-.vscode/
-!.vscode/launch.json
-!.vscode/tasks.json
-
 # Flutter/Dart/Pub related
 **/doc/api/
 **/ios/Flutter/.last_build_id
@@ -55,3 +50,6 @@ Desktop.ini
 # Generated code
 *.g.dart
 *.freezed.dart
+# Environment Variables
+env/
+!env/example.env
