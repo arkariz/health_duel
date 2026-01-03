@@ -75,7 +75,10 @@ void registerAuthModule() {
   // Presentation (Bloc)
   // ========================
 
-  getIt.registerFactory<AuthBloc>(
+  // IMPORTANT: LazySingleton ensures single AuthBloc instance across app
+  // - Router uses it for redirect logic
+  // - BlocProvider.value provides same instance to widget tree
+  getIt.registerLazySingleton<AuthBloc>(
     () => AuthBloc(
       authRepository: getIt<AuthRepository>(),
       signInWithEmail: getIt<SignInWithEmail>(),

@@ -1,8 +1,11 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:get_it/get_it.dart';
+import 'package:go_router/go_router.dart';
 import 'package:health_duel/core/di/core_module.dart';
+import 'package:health_duel/core/router/app_router.dart';
 import 'package:health_duel/features/auth/di/auth_module.dart';
 import 'package:health_duel/core/config/firebase_options.dart';
+import 'package:health_duel/features/auth/presentation/bloc/auth_bloc.dart';
 
 /// GetIt instance - Service Locator for Dependency Injection
 final getIt = GetIt.instance;
@@ -15,6 +18,7 @@ final getIt = GetIt.instance;
 /// Order of initialization:
 /// 1. Core infrastructure (Storage, Network, Security)
 /// 2. Feature modules (Auth, etc.)
+/// 3. Router (requires AuthBloc for redirect logic)
 ///
 /// Usage:
 /// ```dart
@@ -40,9 +44,19 @@ Future<void> initializeDependencies() async {
   // Auth feature: data sources, repositories, use cases
   registerAuthModule();
 
+  // 3. Register Router (needs AuthBloc for redirect logic)
+  _registerRouter();
+
   // TODO: Phase 4+ - Register additional feature modules
   // registerDuelsModule();
   // registerProfileModule();
+}
+
+/// Register GoRouter with auth-aware redirects
+void _registerRouter() {
+  getIt.registerSingleton<GoRouter>(
+    createAppRouter(getIt<AuthBloc>()),
+  );
 }
 
 /// Reset all dependencies (mainly for testing)
