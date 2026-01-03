@@ -6,6 +6,7 @@ library;
 
 import 'dart:async';
 
+import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:health_duel/core/error/failures.dart';
 import 'package:health_duel/features/auth/domain/entities/user.dart';
@@ -16,6 +17,9 @@ import 'package:health_duel/features/auth/domain/usecases/sign_in_with_apple.dar
 import 'package:health_duel/features/auth/domain/usecases/sign_in_with_email.dart';
 import 'package:health_duel/features/auth/domain/usecases/sign_in_with_google.dart';
 import 'package:health_duel/features/auth/domain/usecases/sign_out.dart';
+import 'package:health_duel/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:health_duel/features/auth/presentation/bloc/auth_event.dart';
+import 'package:health_duel/features/auth/presentation/bloc/auth_state.dart';
 import 'package:mocktail/mocktail.dart';
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -36,6 +40,25 @@ class MockSignOut extends Mock implements SignOut {}
 
 class MockGetCurrentUser extends Mock implements GetCurrentUser {}
 
+/// Mock AuthBloc for widget testing
+///
+/// Usage:
+/// ```dart
+/// late MockAuthBloc mockAuthBloc;
+///
+/// setUp(() {
+///   mockAuthBloc = MockAuthBloc();
+/// });
+///
+/// // Stub state and stream
+/// whenListen(
+///   mockAuthBloc,
+///   Stream<AuthState>.fromIterable([AuthLoading(), AuthAuthenticated(user)]),
+///   initialState: AuthInitial(),
+/// );
+/// ```
+class MockAuthBloc extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
+
 // ═══════════════════════════════════════════════════════════════════════════
 // Fallback Values
 // ═══════════════════════════════════════════════════════════════════════════
@@ -54,6 +77,15 @@ void registerFallbackValues() {
   registerFallbackValue(const Right<Failure, User?>(null));
   registerFallbackValue(const Right<Failure, void>(null));
   registerFallbackValue(const Left<Failure, User>(AuthFailure(message: 'test')));
+
+  // Auth Events
+  registerFallbackValue(const AuthCheckRequested());
+  registerFallbackValue(const AuthSignInWithEmailRequested(email: '', password: ''));
+  registerFallbackValue(const AuthSignInWithGoogleRequested());
+  registerFallbackValue(const AuthSignOutRequested());
+
+  // Auth States
+  registerFallbackValue(const AuthInitial());
 }
 
 /// Fake User for fallback registration

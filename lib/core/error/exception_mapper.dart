@@ -57,6 +57,7 @@ class ExceptionMapper {
 
       // Network Exceptions
       NoInternetConnectionException() => NetworkFailure(message: 'No internet connection. Please check your network', errorCode: exception.code),
+      RequestTimeOutException() => NetworkFailure(message: 'Request timeout. Please try again', errorCode: exception.code),
 
       // Permission Exceptions
       PermissionDeniedException() => AuthFailure(message: exception.message ?? 'Permission denied', errorCode: exception.code),
