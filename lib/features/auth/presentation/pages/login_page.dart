@@ -123,7 +123,7 @@ class _LoginPageState extends State<LoginPage> {
                   const SizedBox(height: 24),
 
                   // Test credentials hint
-                  Container(padding: const EdgeInsets.all(12), decoration: BoxDecoration(color: Colors.grey.shade200, borderRadius: BorderRadius.circular(8)), child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [Text('Test Credentials:', style: Theme.of(context).textTheme.labelLarge), const SizedBox(height: 4), const Text('Email: test@example.com'), const Text('Password: test123')])),
+                  Container(padding: const EdgeInsets.all(12), decoration: BoxDecoration(color: Colors.grey.shade200, borderRadius: BorderRadius.circular(8)), child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [Text('Test Credentials:', style: Theme.of(context).textTheme.labelLarge), const SizedBox(height: 4), const Text('Email: test@email.com'), const Text('Password: test123')])),
                 ],
               ),
             ),
