@@ -1,13 +1,14 @@
 import 'package:dartz/dartz.dart';
 import 'package:health_duel/core/error/failures.dart';
-import 'package:health_duel/features/auth/domain/entities/user.dart';
-import 'package:health_duel/features/auth/domain/repositories/auth_repository.dart';
+import 'package:health_duel/data/session/domain/entities/user.dart';
+import 'package:health_duel/data/session/domain/repositories/session_repository.dart';
 
-/// Get Current User Use Case
+/// Get Current User Use Case (Global)
 ///
 /// Business logic for retrieving currently authenticated user.
+/// Can be used by any feature that needs current user info.
 class GetCurrentUser {
-  final AuthRepository repository;
+  final SessionRepository repository;
 
   const GetCurrentUser(this.repository);
 

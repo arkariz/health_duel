@@ -1,12 +1,13 @@
 import 'package:dartz/dartz.dart';
 import 'package:health_duel/core/error/failures.dart';
-import 'package:health_duel/features/auth/domain/repositories/auth_repository.dart';
+import 'package:health_duel/data/session/domain/repositories/session_repository.dart';
 
-/// Sign Out Use Case
+/// Sign Out Use Case (Global)
 ///
 /// Business logic for signing out current user.
+/// Can be used by any feature that needs to log out user.
 class SignOut {
-  final AuthRepository repository;
+  final SessionRepository repository;
 
   const SignOut(this.repository);
 

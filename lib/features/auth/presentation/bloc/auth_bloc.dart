@@ -1,14 +1,12 @@
 import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:health_duel/features/auth/domain/entities/user.dart';
 import 'package:health_duel/features/auth/domain/repositories/auth_repository.dart';
-import 'package:health_duel/features/auth/domain/usecases/get_current_user.dart';
 import 'package:health_duel/features/auth/domain/usecases/register_with_email.dart';
 import 'package:health_duel/features/auth/domain/usecases/sign_in_with_apple.dart';
 import 'package:health_duel/features/auth/domain/usecases/sign_in_with_email.dart';
 import 'package:health_duel/features/auth/domain/usecases/sign_in_with_google.dart';
-import 'package:health_duel/features/auth/domain/usecases/sign_out.dart';
+import 'package:health_duel/data/session/domain/domain.dart';
 import 'package:health_duel/core/bloc/bloc.dart';
 import 'package:health_duel/features/auth/presentation/bloc/auth_event.dart';
 import 'package:health_duel/features/auth/presentation/bloc/auth_state.dart';

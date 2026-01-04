@@ -1,7 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:health_duel/core/bloc/bloc.dart';
-import 'package:health_duel/features/auth/domain/usecases/get_current_user.dart';
-import 'package:health_duel/features/auth/domain/usecases/sign_out.dart';
+import 'package:health_duel/data/session/domain/domain.dart';
 import 'package:health_duel/features/home/presentation/bloc/home_event.dart';
 import 'package:health_duel/features/home/presentation/bloc/home_state.dart';
 

@@ -1,5 +1,5 @@
 import 'package:health_duel/core/bloc/bloc.dart';
-import 'package:health_duel/features/auth/domain/entities/user.dart';
+import 'package:health_duel/data/session/domain/domain.dart';
 
 /// Home feature status
 enum HomeStatus {

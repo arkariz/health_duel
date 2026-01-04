@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:health_duel/core/presentation/widgets/widgets.dart';
-import 'package:health_duel/features/auth/domain/entities/user.dart';
+import 'package:health_duel/data/session/domain/domain.dart';
 import 'package:health_duel/features/home/home.dart';
 
 /// Home Page - Shows authenticated user info with responsive design

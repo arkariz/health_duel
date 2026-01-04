@@ -28,8 +28,8 @@ export 'domain/usecases/sign_in_with_email.dart';
 export 'domain/usecases/sign_in_with_google.dart';
 export 'domain/usecases/sign_in_with_apple.dart';
 export 'domain/usecases/register_with_email.dart';
-export 'domain/usecases/sign_out.dart';
-export 'domain/usecases/get_current_user.dart';
+// NOTE: GetCurrentUser and SignOut are global use cases
+// Export from 'package:health_duel/data/domain/domain.dart'
 
 // ========================
 // Data Layer

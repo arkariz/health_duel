@@ -3,6 +3,7 @@ import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:health_duel/core/di/core_module.dart';
 import 'package:health_duel/core/router/app_router.dart';
+import 'package:health_duel/data/session/di/session_module.dart';
 import 'package:health_duel/features/auth/di/auth_module.dart';
 import 'package:health_duel/core/config/firebase_options.dart';
 import 'package:health_duel/features/auth/presentation/bloc/auth_bloc.dart';
@@ -42,6 +43,9 @@ Future<void> initializeDependencies() async {
   await getIt.allReady();
 
   // 2. Register Feature Modules
+  // Session module: global session use cases & repository
+  registerSessionModule(getIt);
+
   // Auth feature: data sources, repositories, use cases
   registerAuthModule();
 
