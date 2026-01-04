@@ -1,12 +1,11 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:health_duel/core/di/injection.dart';
 import 'package:health_duel/core/router/go_router_refresh.dart';
 import 'package:health_duel/core/router/routes.dart';
-import 'package:health_duel/features/auth/presentation/bloc/auth_bloc.dart';
-import 'package:health_duel/features/auth/presentation/bloc/auth_state.dart';
-import 'package:health_duel/features/auth/presentation/pages/home_page.dart';
-import 'package:health_duel/features/auth/presentation/pages/login_page.dart';
-import 'package:health_duel/features/auth/presentation/pages/register_page.dart';
+import 'package:health_duel/features/auth/auth.dart';
+import 'package:health_duel/features/home/home.dart';
 
 /// Creates GoRouter with auth-aware redirects
 ///
@@ -40,7 +39,7 @@ GoRouter createAppRouter(AuthBloc authBloc) {
       GoRoute(
         path: AppRoutes.home,
         name: 'home',
-        builder: (_, __) => const HomePage(),
+        builder: (_, __) => BlocProvider(create: (_) => getIt<HomeBloc>(), child: const HomePage()),
       ),
     ],
   );
@@ -79,4 +78,3 @@ String? _authRedirect(AuthBloc authBloc, GoRouterState state) {
   // No redirect needed
   return null;
 }
-

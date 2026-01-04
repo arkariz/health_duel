@@ -62,7 +62,6 @@ export 'presentation/bloc/auth_state.dart';
 // Pages
 export 'presentation/pages/login_page.dart';
 export 'presentation/pages/register_page.dart';
-export 'presentation/pages/home_page.dart';
 
 // Widgets
 export 'presentation/widgets/auth_guard.dart';

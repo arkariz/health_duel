@@ -6,6 +6,7 @@ import 'package:health_duel/core/router/app_router.dart';
 import 'package:health_duel/features/auth/di/auth_module.dart';
 import 'package:health_duel/core/config/firebase_options.dart';
 import 'package:health_duel/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:health_duel/features/home/di/home_module.dart';
 
 /// GetIt instance - Service Locator for Dependency Injection
 final getIt = GetIt.instance;
@@ -43,6 +44,9 @@ Future<void> initializeDependencies() async {
   // 2. Register Feature Modules
   // Auth feature: data sources, repositories, use cases
   registerAuthModule();
+
+  // Home feature: HomeBloc (depends on auth use cases)
+  registerHomeModule(getIt);
 
   // 3. Register Router (needs AuthBloc for redirect logic)
   _registerRouter();
