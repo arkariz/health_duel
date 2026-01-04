@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:health_duel/core/theme/theme.dart';
 
 import 'skeleton_layouts.dart';
 import 'skeleton_shapes.dart';
@@ -29,7 +30,7 @@ import 'skeleton_shapes.dart';
 ///   .build()
 /// ```
 class SkeletonBuilder {
-  SkeletonBuilder({this.padding = const EdgeInsets.all(16), this.crossAxisAlignment = CrossAxisAlignment.start});
+  SkeletonBuilder({this.padding = const EdgeInsets.all(AppSpacing.md), this.crossAxisAlignment = CrossAxisAlignment.start});
 
   /// Padding around the entire skeleton
   final EdgeInsets padding;
@@ -133,18 +134,18 @@ class SkeletonFactory {
   /// Creates a profile page skeleton
   ///
   /// Shows avatar, name, bio, and stats row.
-  static Widget profile({EdgeInsets padding = const EdgeInsets.all(24)}) {
+  static Widget profile({EdgeInsets padding = const EdgeInsets.all(AppSpacing.lg)}) {
     return Padding(
       padding: padding,
       child: Column(
         children: [
           const SkeletonCircle(size: 80),
-          const SizedBox(height: 16),
+          const SizedBox(height: AppSpacing.md),
           const SkeletonText(widthFactor: 0.4, height: 20),
-          const SizedBox(height: 8),
+          const SizedBox(height: AppSpacing.sm),
           const SkeletonText(widthFactor: 0.6, height: 14),
-          const SizedBox(height: 24),
-          Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: List.generate(3, (_) => const Column(children: [SkeletonBox(width: 40, height: 20), SizedBox(height: 4), SkeletonBox(width: 60, height: 12)]))),
+          const SizedBox(height: AppSpacing.lg),
+          Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: List.generate(3, (_) => const Column(children: [SkeletonBox(width: 40, height: 20), SizedBox(height: AppSpacing.xs), SkeletonBox(width: 60, height: 12)]))),
         ],
       ),
     );
@@ -153,18 +154,18 @@ class SkeletonFactory {
   /// Creates a detail page skeleton
   ///
   /// Shows image, title, subtitle, and content paragraphs.
-  static Widget detail({EdgeInsets padding = const EdgeInsets.all(16), bool hasImage = true, int paragraphCount = 3}) {
+  static Widget detail({EdgeInsets padding = const EdgeInsets.all(AppSpacing.md), bool hasImage = true, int paragraphCount = 3}) {
     return SingleChildScrollView(
       padding: padding,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          if (hasImage) ...[const SkeletonBox(height: 200, borderRadius: 12), const SizedBox(height: 16)],
+          if (hasImage) ...[const SkeletonBox(height: 200, borderRadius: 12), const SizedBox(height: AppSpacing.md)],
           const SkeletonText(widthFactor: 0.8, height: 24),
-          const SizedBox(height: 8),
+          const SizedBox(height: AppSpacing.sm),
           const SkeletonText(widthFactor: 0.5, height: 14),
-          const SizedBox(height: 24),
-          for (int i = 0; i < paragraphCount; i++) ...[const SkeletonText(height: 14), const SizedBox(height: 6), const SkeletonText(height: 14), const SizedBox(height: 6), const SkeletonText(widthFactor: 0.7, height: 14), const SizedBox(height: 16)],
+          const SizedBox(height: AppSpacing.lg),
+          for (int i = 0; i < paragraphCount; i++) ...[const SkeletonText(height: 14), const SizedBox(height: AppSpacing.xs), const SkeletonText(height: 14), const SizedBox(height: AppSpacing.xs), const SkeletonText(widthFactor: 0.7, height: 14), const SizedBox(height: AppSpacing.md)],
         ],
       ),
     );
@@ -176,36 +177,36 @@ class SkeletonFactory {
   }
 
   /// Creates a grid skeleton
-  static Widget grid({int itemCount = 6, int crossAxisCount = 2, double itemHeight = 120, EdgeInsets padding = const EdgeInsets.all(16)}) {
+  static Widget grid({int itemCount = 6, int crossAxisCount = 2, double itemHeight = 120, EdgeInsets padding = const EdgeInsets.all(AppSpacing.md)}) {
     return SkeletonGrid(itemCount: itemCount, crossAxisCount: crossAxisCount, itemHeight: itemHeight, padding: padding);
   }
 
   /// Creates a form skeleton
-  static Widget form({int fieldCount = 3, bool hasTitle = true, bool hasButton = true, EdgeInsets padding = const EdgeInsets.all(24)}) {
+  static Widget form({int fieldCount = 3, bool hasTitle = true, bool hasButton = true, EdgeInsets padding = const EdgeInsets.all(AppSpacing.lg)}) {
     return SkeletonForm(fieldCount: fieldCount, hasTitle: hasTitle, hasButton: hasButton, padding: padding);
   }
 
   /// Creates a settings/menu list skeleton
   static Widget settings({int itemCount = 6, EdgeInsets padding = EdgeInsets.zero}) {
-    return ListView.separated(padding: padding, physics: const NeverScrollableScrollPhysics(), shrinkWrap: true, itemCount: itemCount, separatorBuilder: (_, __) => const Divider(height: 1), itemBuilder: (_, __) => const Padding(padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12), child: Row(children: [SkeletonCircle(size: 24), SizedBox(width: 16), Expanded(child: SkeletonText(widthFactor: 0.5, height: 16)), SkeletonBox(width: 24, height: 24, borderRadius: 4)])));
+    return ListView.separated(padding: padding, physics: const NeverScrollableScrollPhysics(), shrinkWrap: true, itemCount: itemCount, separatorBuilder: (_, __) => const Divider(height: 1), itemBuilder: (_, __) => const Padding(padding: EdgeInsets.symmetric(horizontal: AppSpacing.md, vertical: AppSpacing.md), child: Row(children: [SkeletonCircle(size: 24), SizedBox(width: AppSpacing.md), Expanded(child: SkeletonText(widthFactor: 0.5, height: 16)), SkeletonBox(width: 24, height: 24, borderRadius: 4)])));
   }
 
   /// Creates a dashboard/stats skeleton
-  static Widget dashboard({int cardCount = 4, EdgeInsets padding = const EdgeInsets.all(16)}) {
+  static Widget dashboard({int cardCount = 4, EdgeInsets padding = const EdgeInsets.all(AppSpacing.md)}) {
     return Padding(
       padding: padding,
       child: Column(
         children: [
           // Stats row
-          Row(children: List.generate(2, (_) => const Expanded(child: Card(child: Padding(padding: EdgeInsets.all(16), child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [SkeletonBox(width: 40, height: 12), SizedBox(height: 8), SkeletonBox(width: 80, height: 24)])))))),
-          const SizedBox(height: 16),
+          Row(children: List.generate(2, (_) => const Expanded(child: Card(child: Padding(padding: EdgeInsets.all(AppSpacing.md), child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [SkeletonBox(width: 40, height: 12), SizedBox(height: AppSpacing.sm), SkeletonBox(width: 80, height: 24)])))))),
+          const SizedBox(height: AppSpacing.md),
           // Chart placeholder
           const SkeletonBox(height: 200, borderRadius: 12),
-          const SizedBox(height: 16),
+          const SizedBox(height: AppSpacing.md),
           // Recent items
           const SkeletonText(widthFactor: 0.3, height: 18),
-          const SizedBox(height: 12),
-          ...List.generate(cardCount, (_) => const Padding(padding: EdgeInsets.only(bottom: 8), child: SkeletonListTile(hasLeading: false, hasTrailing: true))),
+          const SizedBox(height: AppSpacing.md),
+          ...List.generate(cardCount, (_) => const Padding(padding: EdgeInsets.only(bottom: AppSpacing.sm), child: SkeletonListTile(hasLeading: false, hasTrailing: true))),
         ],
       ),
     );

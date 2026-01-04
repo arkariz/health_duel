@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:health_duel/core/presentation/widgets/widgets.dart';
+import 'package:health_duel/core/theme/theme.dart';
 import 'package:health_duel/data/session/domain/domain.dart';
 import 'package:health_duel/features/home/home.dart';
 
@@ -100,14 +101,14 @@ class _LoadingView extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const SkeletonCircle(size: 100),
-                const SizedBox(height: 16),
+                const SizedBox(height: AppSpacing.md),
                 const SkeletonText(width: 200),
-                const SizedBox(height: 8),
+                const SizedBox(height: AppSpacing.sm),
                 const SkeletonText(width: 150),
-                const SizedBox(height: 24),
+                const SizedBox(height: AppSpacing.lg),
                 SkeletonCard(height: context.responsiveValue(phone: 180.0, tablet: 160.0, desktop: 140.0)),
                 if (message != null) ...[
-                  const SizedBox(height: 24),
+                  const SizedBox(height: AppSpacing.lg),
                   Text(
                     message!,
                     style: Theme.of(context).textTheme.bodyLarge?.copyWith(
@@ -141,9 +142,9 @@ class _ErrorView extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(Icons.error_outline, size: 64, color: theme.colorScheme.error),
-            const SizedBox(height: 16),
+            const SizedBox(height: AppSpacing.md),
             Text('Oops!', style: theme.textTheme.headlineMedium?.copyWith(fontWeight: FontWeight.bold)),
-            const SizedBox(height: 8),
+            const SizedBox(height: AppSpacing.sm),
             Text(
               message,
               style: theme.textTheme.bodyLarge?.copyWith(
@@ -151,7 +152,7 @@ class _ErrorView extends StatelessWidget {
               ),
               textAlign: TextAlign.center,
             ),
-            const SizedBox(height: 24),
+            const SizedBox(height: AppSpacing.lg),
             FilledButton.icon(
               onPressed: () => context.read<HomeBloc>().add(const HomeLoadUserRequested()),
               icon: const Icon(Icons.refresh),
@@ -198,13 +199,13 @@ class _AuthenticatedView extends StatelessWidget {
   Widget _buildMobileLayout(BuildContext context, ThemeData theme) {
     return Column(
       children: [
-        const SizedBox(height: 24),
+        const SizedBox(height: AppSpacing.lg),
         _buildUserHeader(context, theme),
-        const SizedBox(height: 32),
+        const SizedBox(height: AppSpacing.xl),
         _buildUserDetailsCard(context, theme),
-        const SizedBox(height: 24),
+        const SizedBox(height: AppSpacing.lg),
         _buildSuccessMessage(context, theme),
-        const SizedBox(height: 24),
+        const SizedBox(height: AppSpacing.lg),
       ],
     );
   }
@@ -212,18 +213,18 @@ class _AuthenticatedView extends StatelessWidget {
   Widget _buildTabletLayout(BuildContext context, ThemeData theme) {
     return Column(
       children: [
-        const SizedBox(height: 40),
+        const SizedBox(height: AppSpacing.xxl),
         _buildUserHeader(context, theme),
-        const SizedBox(height: 40),
+        const SizedBox(height: AppSpacing.xxl),
         Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Expanded(child: _buildUserDetailsCard(context, theme)),
-            const SizedBox(width: 24),
+            const SizedBox(width: AppSpacing.lg),
             Expanded(child: _buildSuccessMessage(context, theme)),
           ],
         ),
-        const SizedBox(height: 40),
+        const SizedBox(height: AppSpacing.xxl),
       ],
     );
   }
@@ -241,7 +242,7 @@ class _AuthenticatedView extends StatelessWidget {
             ? Text(user.name[0].toUpperCase(), style: TextStyle(fontSize: avatarSize * 0.8, color: Colors.white))
             : null,
         ),
-        const SizedBox(height: 24),
+        const SizedBox(height: AppSpacing.lg),
         Text(
           user.name,
           style: context
@@ -249,7 +250,7 @@ class _AuthenticatedView extends StatelessWidget {
             ?.copyWith(fontWeight: FontWeight.bold),
           textAlign: TextAlign.center,
         ),
-        const SizedBox(height: 8),
+        const SizedBox(height: AppSpacing.sm),
         Text(
           user.email,
           style: theme.textTheme.bodyLarge?.copyWith(color: theme.colorScheme.onSurface.withAlpha((255 * 0.7).round())),
@@ -269,7 +270,7 @@ class _AuthenticatedView extends StatelessWidget {
             Row(
               children: [
                 Icon(Icons.person_outline, color: theme.colorScheme.primary),
-                const SizedBox(width: 8),
+                const SizedBox(width: AppSpacing.sm),
                 Text('User Details', style: theme.textTheme.titleLarge),
               ],
             ),
@@ -288,7 +289,7 @@ class _AuthenticatedView extends StatelessWidget {
     final labelWidth = context.responsiveValue(phone: 100.0, tablet: 120.0, desktop: 140.0);
 
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 4.0),
+      padding: const EdgeInsets.symmetric(vertical: AppSpacing.xs),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -300,21 +301,23 @@ class _AuthenticatedView extends StatelessWidget {
   }
 
   Widget _buildSuccessMessage(BuildContext context, ThemeData theme) {
+    final successColor = context.appColors.success;
+
     return Container(
       padding: EdgeInsets.all(context.responsiveValue(phone: 16.0, tablet: 20.0)),
       decoration: BoxDecoration(
-        color: Colors.green.shade50,
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Colors.green.shade200),
+        color: successColor.withAlpha((255 * 0.1).round()),
+        borderRadius: AppRadius.lgBorder,
+        border: Border.all(color: successColor.withAlpha((255 * 0.3).round())),
       ),
       child: Row(
         children: [
           Icon(
             Icons.check_circle,
-            color: Colors.green.shade700,
+            color: successColor,
             size: context.responsiveValue(phone: 24.0, tablet: 28.0),
           ),
-          const SizedBox(width: 12),
+          const SizedBox(width: AppSpacing.md),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -322,16 +325,16 @@ class _AuthenticatedView extends StatelessWidget {
                 Text(
                   'Connected!',
                   style: TextStyle(
-                    color: Colors.green.shade700,
+                    color: successColor,
                     fontWeight: FontWeight.bold,
                     fontSize: context.responsiveValue(phone: 14.0, tablet: 16.0),
                   ),
                 ),
-                const SizedBox(height: 4),
+                const SizedBox(height: AppSpacing.xs),
                 Text(
                   'Auth + Firestore bootstrap successful.',
                   style: TextStyle(
-                    color: Colors.green.shade600,
+                    color: successColor.withAlpha((255 * 0.8).round()),
                     fontSize: context.responsiveValue(phone: 12.0, tablet: 14.0),
                   ),
                 ),

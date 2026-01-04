@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:health_duel/core/theme/theme.dart';
 
 import 'connectivity_cubit.dart';
 import 'connectivity_state.dart';
@@ -37,7 +38,24 @@ class OfflineBanner extends StatelessWidget {
           return const SizedBox.shrink();
         }
 
-        return Material(color: Colors.grey.shade800, child: SafeArea(bottom: false, child: Padding(padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8), child: Row(children: [const Icon(Icons.wifi_off_rounded, color: Colors.white70, size: 18), const SizedBox(width: 12), Expanded(child: Text(message, style: const TextStyle(color: Colors.white, fontSize: 13))), if (showRetry && onRetry != null) TextButton(onPressed: onRetry, child: const Text('Retry', style: TextStyle(color: Colors.white)))]))));
+        return Material(
+          color: Colors.grey.shade800,
+          child: SafeArea(
+            bottom: false,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md, vertical: AppSpacing.sm),
+              child: Row(
+                children: [
+                  const Icon(Icons.wifi_off_rounded, color: Colors.white70, size: 18),
+                  const SizedBox(width: AppSpacing.md),
+                  Expanded(child: Text(message, style: const TextStyle(color: Colors.white, fontSize: 13))),
+                  if (showRetry && onRetry != null)
+                    TextButton(onPressed: onRetry, child: const Text('Retry', style: TextStyle(color: Colors.white))),
+                ],
+              ),
+            ),
+          ),
+        );
       },
     );
   }
@@ -77,6 +95,22 @@ class _OfflineBannerContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Material(color: Colors.grey.shade800, child: SafeArea(bottom: false, child: Padding(padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8), child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [const Icon(Icons.wifi_off_rounded, color: Colors.white70, size: 16), const SizedBox(width: 8), Text(message, style: const TextStyle(color: Colors.white, fontSize: 13))]))));
+    return Material(
+      color: Colors.grey.shade800,
+      child: SafeArea(
+        bottom: false,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md, vertical: AppSpacing.sm),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Icon(Icons.wifi_off_rounded, color: Colors.white70, size: 16),
+              const SizedBox(width: AppSpacing.sm),
+              Text(message, style: const TextStyle(color: Colors.white, fontSize: 13)),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }

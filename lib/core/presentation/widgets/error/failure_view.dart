@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:health_duel/core/error/failures.dart';
+import 'package:health_duel/core/theme/theme.dart';
 
 import 'failure_display_style.dart';
 
@@ -53,17 +54,38 @@ class FailureFullScreenView extends StatelessWidget {
 
     return Center(
       child: Padding(
-        padding: const EdgeInsets.all(32),
+        padding: const EdgeInsets.all(AppSpacing.xl),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(style.icon, size: 80, color: style.color.withAlpha((255 * 0.7).round())),
-            const SizedBox(height: 24),
-            Text(style.title, style: theme.textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold), textAlign: TextAlign.center),
-            const SizedBox(height: 12),
-            Text(failure.message, style: theme.textTheme.bodyMedium?.copyWith(color: theme.colorScheme.onSurface.withAlpha((255 * 0.7).round())), textAlign: TextAlign.center),
-            if (onRetry != null) ...[const SizedBox(height: 32), FilledButton.icon(onPressed: onRetry, icon: const Icon(Icons.refresh), label: const Text('Try Again'))],
-            if (failure.errorCode != null) ...[const SizedBox(height: 16), Text('Error code: ${failure.errorCode}', style: theme.textTheme.bodySmall?.copyWith(color: theme.colorScheme.onSurface.withAlpha((255 * 0.5).round())))],
+            const SizedBox(height: AppSpacing.lg),
+            Text(
+              style.title,
+              style: theme.textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: AppSpacing.md),
+            Text(
+              failure.message,
+              style: theme.textTheme.bodyMedium?.copyWith(
+                color: theme.colorScheme.onSurface.withAlpha((255 * 0.7).round()),
+              ),
+              textAlign: TextAlign.center,
+            ),
+            if (onRetry != null) ...[
+              const SizedBox(height: AppSpacing.xl),
+              FilledButton.icon(onPressed: onRetry, icon: const Icon(Icons.refresh), label: const Text('Try Again')),
+            ],
+            if (failure.errorCode != null) ...[
+              const SizedBox(height: AppSpacing.md),
+              Text(
+                'Error code: ${failure.errorCode}',
+                style: theme.textTheme.bodySmall?.copyWith(
+                  color: theme.colorScheme.onSurface.withAlpha((255 * 0.5).round()),
+                ),
+              ),
+            ],
           ],
         ),
       ),
@@ -86,14 +108,38 @@ class FailureInlineView extends StatelessWidget {
     final theme = Theme.of(context);
 
     return Container(
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(color: style.color.withAlpha((255 * 0.1).round()), borderRadius: BorderRadius.circular(12), border: Border.all(color: style.color.withAlpha((255 * 0.3).round()))),
+      padding: const EdgeInsets.all(AppSpacing.md),
+      decoration: BoxDecoration(
+        color: style.color.withAlpha((255 * 0.1).round()),
+        borderRadius: AppRadius.lgBorder,
+        border: Border.all(color: style.color.withAlpha((255 * 0.3).round())),
+      ),
       child: Row(
         children: [
           Icon(style.icon, color: style.color, size: 24),
-          const SizedBox(width: 12),
-          Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, mainAxisSize: MainAxisSize.min, children: [Text(style.title, style: theme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w600)), const SizedBox(height: 2), Text(failure.message, style: theme.textTheme.bodySmall?.copyWith(color: theme.colorScheme.onSurface.withAlpha((255 * 0.7).round())), maxLines: 2, overflow: TextOverflow.ellipsis)])),
-          if (onRetry != null) ...[const SizedBox(width: 8), IconButton(onPressed: onRetry, icon: const Icon(Icons.refresh), tooltip: 'Retry')],
+          const SizedBox(width: AppSpacing.md),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(style.title, style: theme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w600)),
+                const SizedBox(height: AppSpacing.xs),
+                Text(
+                  failure.message,
+                  style: theme.textTheme.bodySmall?.copyWith(
+                    color: theme.colorScheme.onSurface.withAlpha((255 * 0.7).round()),
+                  ),
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ],
+            ),
+          ),
+          if (onRetry != null) ...[
+            const SizedBox(width: AppSpacing.sm),
+            IconButton(onPressed: onRetry, icon: const Icon(Icons.refresh), tooltip: 'Retry'),
+          ],
         ],
       ),
     );

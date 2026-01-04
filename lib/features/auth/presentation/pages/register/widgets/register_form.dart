@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:health_duel/core/presentation/widgets/widgets.dart';
+import 'package:health_duel/core/theme/theme.dart';
 
 /// Register form with validation
 class RegisterForm extends StatelessWidget {
@@ -64,7 +65,7 @@ class RegisterForm extends StatelessWidget {
                 autofillHints: const [AutofillHints.name],
                 validator: FormValidators.required,
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: AppSpacing.md),
 
               // Email field with real-time validation
               ValidatedTextField(
@@ -76,7 +77,7 @@ class RegisterForm extends StatelessWidget {
                 autofillHints: const [AutofillHints.email],
                 validator: FormValidators.email,
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: AppSpacing.md),
 
               // Password field with visibility toggle
               PasswordTextField(
@@ -85,7 +86,7 @@ class RegisterForm extends StatelessWidget {
                 textInputAction: TextInputAction.next,
                 validator: (value) => FormValidators.password(value, minLength: 6),
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: AppSpacing.md),
 
               // Confirm password field
               PasswordTextField(
@@ -103,21 +104,21 @@ class RegisterForm extends StatelessWidget {
                   return null;
                 },
               ),
-              const SizedBox(height: 32),
+              const SizedBox(height: AppSpacing.xl),
 
               // Register button
               FilledButton(
                 onPressed: onRegister,
                 style: FilledButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(vertical: 16),
+                  padding: const EdgeInsets.symmetric(vertical: AppSpacing.md),
                 ),
                 child: const Text('Create Account'),
               ),
-              const SizedBox(height: 24),
+              const SizedBox(height: AppSpacing.lg),
 
               // Terms and conditions hint
               const _TermsHint(),
-              const SizedBox(height: 24),
+              const SizedBox(height: AppSpacing.lg),
 
               // Login link
               _LoginLink(onPressed: () => context.pop()),
@@ -144,7 +145,7 @@ class _RegisterHeader extends StatelessWidget {
           size: context.responsiveValue(phone: 64.0, tablet: 80.0, desktop: 96.0),
           color: theme.colorScheme.primary,
         ),
-        const SizedBox(height: 16),
+        const SizedBox(height: AppSpacing.md),
         Text(
           'Join Health Duel',
           style: context
@@ -156,7 +157,7 @@ class _RegisterHeader extends StatelessWidget {
               ?.copyWith(fontWeight: FontWeight.bold),
           textAlign: TextAlign.center,
         ),
-        const SizedBox(height: 8),
+        const SizedBox(height: AppSpacing.sm),
         Text(
           'Create an account to start challenging friends',
           style: theme.textTheme.bodyMedium?.copyWith(

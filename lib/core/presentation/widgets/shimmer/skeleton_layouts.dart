@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:health_duel/core/theme/theme.dart';
 
 import 'skeleton_shapes.dart';
 
@@ -12,7 +13,7 @@ import 'skeleton_shapes.dart';
 /// )
 /// ```
 class SkeletonListTile extends StatelessWidget {
-  const SkeletonListTile({this.hasLeading = true, this.hasTrailing = false, this.titleWidthFactor = 0.6, this.subtitleWidthFactor = 0.4, this.leadingSize = 40, this.padding = const EdgeInsets.symmetric(horizontal: 16, vertical: 12), super.key});
+  const SkeletonListTile({this.hasLeading = true, this.hasTrailing = false, this.titleWidthFactor = 0.6, this.subtitleWidthFactor = 0.4, this.leadingSize = 40, this.padding = const EdgeInsets.symmetric(horizontal: AppSpacing.md, vertical: 12), super.key});
 
   /// Whether to show leading circle (avatar)
   final bool hasLeading;
@@ -38,9 +39,9 @@ class SkeletonListTile extends StatelessWidget {
       padding: padding,
       child: Row(
         children: [
-          if (hasLeading) ...[SkeletonCircle(size: leadingSize), const SizedBox(width: 16)],
-          Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [SkeletonText(widthFactor: titleWidthFactor, height: 16), const SizedBox(height: 8), SkeletonText(widthFactor: subtitleWidthFactor, height: 12)])),
-          if (hasTrailing) ...[const SizedBox(width: 16), const SkeletonBox(width: 60, height: 32, borderRadius: 8)],
+          if (hasLeading) ...[SkeletonCircle(size: leadingSize), const SizedBox(width: AppSpacing.md)],
+          Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [SkeletonText(widthFactor: titleWidthFactor, height: 16), const SizedBox(height: AppSpacing.sm), SkeletonText(widthFactor: subtitleWidthFactor, height: 12)])),
+          if (hasTrailing) ...[const SizedBox(width: AppSpacing.md), const SkeletonBox(width: 60, height: 32, borderRadius: 8)],
         ],
       ),
     );
@@ -54,7 +55,7 @@ class SkeletonListTile extends StatelessWidget {
 /// SkeletonCard(height: 120, hasImage: true)
 /// ```
 class SkeletonCard extends StatelessWidget {
-  const SkeletonCard({this.height = 120, this.hasImage = true, this.imageSize = 80, this.margin = const EdgeInsets.symmetric(horizontal: 16, vertical: 8), super.key});
+  const SkeletonCard({this.height = 120, this.hasImage = true, this.imageSize = 80, this.margin = const EdgeInsets.symmetric(horizontal: AppSpacing.md, vertical: AppSpacing.sm), super.key});
 
   /// Total height of the card
   final double height;
@@ -75,11 +76,11 @@ class SkeletonCard extends StatelessWidget {
       child: SizedBox(
         height: height,
         child: Padding(
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.all(AppSpacing.md),
           child: Row(
             children: [
-              if (hasImage) ...[SkeletonBox(width: imageSize, height: imageSize, borderRadius: 8), const SizedBox(width: 16)],
-              const Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, mainAxisAlignment: MainAxisAlignment.center, children: [SkeletonText(height: 18), SizedBox(height: 8), SkeletonText(widthFactor: 0.6, height: 14), SizedBox(height: 8), SkeletonText(widthFactor: 0.4, height: 14)])),
+              if (hasImage) ...[SkeletonBox(width: imageSize, height: imageSize, borderRadius: 8), const SizedBox(width: AppSpacing.md)],
+              const Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, mainAxisAlignment: MainAxisAlignment.center, children: [SkeletonText(height: 18), SizedBox(height: AppSpacing.sm), SkeletonText(widthFactor: 0.6, height: 14), SizedBox(height: AppSpacing.sm), SkeletonText(widthFactor: 0.4, height: 14)])),
             ],
           ),
         ),
@@ -95,7 +96,7 @@ class SkeletonCard extends StatelessWidget {
 /// SkeletonForm(fieldCount: 3, hasButton: true)
 /// ```
 class SkeletonForm extends StatelessWidget {
-  const SkeletonForm({this.fieldCount = 2, this.hasButton = true, this.hasTitle = true, this.padding = const EdgeInsets.all(24), super.key});
+  const SkeletonForm({this.fieldCount = 2, this.hasButton = true, this.hasTitle = true, this.padding = const EdgeInsets.all(AppSpacing.lg), super.key});
 
   /// Number of form field skeletons to show
   final int fieldCount;
@@ -118,16 +119,16 @@ class SkeletonForm extends StatelessWidget {
         children: [
           if (hasTitle) ...[
             // Title skeleton
-            const Center(child: const SkeletonText(widthFactor: 0.4, height: 32)),
-            const SizedBox(height: 8),
+            const Center(child: SkeletonText(widthFactor: 0.4, height: 32)),
+            const SizedBox(height: AppSpacing.sm),
             const Center(child: SkeletonText(widthFactor: 0.5, height: 16)),
-            const SizedBox(height: 40),
+            const SizedBox(height: AppSpacing.xxl),
           ],
 
           // Form fields
-          for (int i = 0; i < fieldCount; i++) ...[const SkeletonBox(height: 56, borderRadius: 8), const SizedBox(height: 16)],
+          for (int i = 0; i < fieldCount; i++) ...[const SkeletonBox(height: 56, borderRadius: 8), const SizedBox(height: AppSpacing.md)],
 
-          if (hasButton) ...[const SizedBox(height: 8), const SkeletonBox(height: 48, borderRadius: 8)],
+          if (hasButton) ...[const SizedBox(height: AppSpacing.sm), const SkeletonBox(height: 48, borderRadius: 8)],
         ],
       ),
     );
@@ -144,7 +145,7 @@ class SkeletonForm extends StatelessWidget {
 /// )
 /// ```
 class SkeletonGrid extends StatelessWidget {
-  const SkeletonGrid({this.itemCount = 4, this.crossAxisCount = 2, this.itemHeight = 120, this.spacing = 16, this.padding = const EdgeInsets.all(16), super.key});
+  const SkeletonGrid({this.itemCount = 4, this.crossAxisCount = 2, this.itemHeight = 120, this.spacing = 16, this.padding = const EdgeInsets.all(AppSpacing.md), super.key});
 
   /// Number of skeleton items
   final int itemCount;

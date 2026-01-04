@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:health_duel/core/presentation/widgets/widgets.dart';
+import 'package:health_duel/core/theme/theme.dart';
 
 /// Login form with validation
 class LoginForm extends StatelessWidget {
@@ -64,7 +65,7 @@ class LoginForm extends StatelessWidget {
                 autofillHints: const [AutofillHints.email],
                 validator: FormValidators.email,
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: AppSpacing.md),
 
               // Password field with visibility toggle
               PasswordTextField(
@@ -74,21 +75,21 @@ class LoginForm extends StatelessWidget {
                 onFieldSubmitted: (_) => onSignIn(),
                 validator: (value) => FormValidators.password(value, minLength: 6),
               ),
-              const SizedBox(height: 32),
+              const SizedBox(height: AppSpacing.xl),
 
               // Sign in button
               FilledButton(
                 onPressed: onSignIn,
                 style: FilledButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(vertical: 16),
+                  padding: const EdgeInsets.symmetric(vertical: AppSpacing.md),
                 ),
                 child: const Text('Sign In'),
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: AppSpacing.md),
 
               // Divider
               _OrDivider(theme: theme),
-              const SizedBox(height: 16),
+              const SizedBox(height: AppSpacing.md),
 
               // Google sign in button
               OutlinedButton.icon(
@@ -96,10 +97,10 @@ class LoginForm extends StatelessWidget {
                 icon: const Icon(Icons.g_mobiledata, size: 24),
                 label: const Text('Continue with Google'),
                 style: OutlinedButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(vertical: 14),
+                  padding: const EdgeInsets.symmetric(vertical: AppSpacing.md),
                 ),
               ),
-              const SizedBox(height: 32),
+              const SizedBox(height: AppSpacing.xl),
 
               // Register link
               Row(
@@ -116,7 +117,7 @@ class LoginForm extends StatelessWidget {
                 ],
               ),
 
-              const SizedBox(height: 24),
+              const SizedBox(height: AppSpacing.lg),
 
               // Test credentials hint (dev only)
               const _TestCredentialsHint(),
@@ -147,7 +148,7 @@ class _LoginHeader extends StatelessWidget {
           ),
           color: theme.colorScheme.primary,
         ),
-        const SizedBox(height: 16),
+        const SizedBox(height: AppSpacing.md),
         Text(
           'Health Duel',
           style: context
@@ -159,7 +160,7 @@ class _LoginHeader extends StatelessWidget {
               ?.copyWith(fontWeight: FontWeight.bold),
           textAlign: TextAlign.center,
         ),
-        const SizedBox(height: 8),
+        const SizedBox(height: AppSpacing.sm),
         Text(
           'Challenge your friends to stay active!',
           style: theme.textTheme.bodyMedium?.copyWith(
@@ -184,7 +185,7 @@ class _OrDivider extends StatelessWidget {
       children: [
         const Expanded(child: Divider()),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
+          padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md),
           child: Text(
             'or',
             style: theme.textTheme.bodySmall?.copyWith(
@@ -207,10 +208,10 @@ class _TestCredentialsHint extends StatelessWidget {
     final theme = Theme.of(context);
 
     return Container(
-      padding: const EdgeInsets.all(12),
+      padding: const EdgeInsets.all(AppSpacing.md),
       decoration: BoxDecoration(
         color: theme.colorScheme.surfaceContainerHighest,
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: AppRadius.mdBorder,
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -222,7 +223,7 @@ class _TestCredentialsHint extends StatelessWidget {
                 size: 16,
                 color: theme.colorScheme.onSurfaceVariant,
               ),
-              const SizedBox(width: 8),
+              const SizedBox(width: AppSpacing.sm),
               Text(
                 'Test Credentials',
                 style: theme.textTheme.labelLarge?.copyWith(
@@ -231,7 +232,7 @@ class _TestCredentialsHint extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: 8),
+          const SizedBox(height: AppSpacing.sm),
           Text(
             'Email: test@email.com\nPassword: test123',
             style: theme.textTheme.bodySmall?.copyWith(

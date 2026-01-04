@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:health_duel/core/theme/theme.dart';
 
 /// Type of message banner
 enum MessageBannerType {
@@ -47,7 +48,26 @@ class MessageBanner extends StatelessWidget {
   Widget build(BuildContext context) {
     final config = _getBannerStyle(type);
 
-    return Material(color: config.backgroundColor, child: SafeArea(bottom: false, child: Padding(padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12), child: Row(children: [Icon(config.icon, color: config.foregroundColor, size: 20), const SizedBox(width: 12), Expanded(child: Text(message, style: TextStyle(color: config.foregroundColor))), if (onRetry != null && (type == MessageBannerType.error || type == MessageBannerType.warning)) TextButton(onPressed: onRetry, child: Text('Retry', style: TextStyle(color: config.foregroundColor))), if (onDismiss != null) IconButton(onPressed: onDismiss, icon: Icon(Icons.close, color: config.foregroundColor), iconSize: 20)]))));
+    return Material(
+      color: config.backgroundColor,
+      child: SafeArea(
+        bottom: false,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md, vertical: AppSpacing.md),
+          child: Row(
+            children: [
+              Icon(config.icon, color: config.foregroundColor, size: 20),
+              const SizedBox(width: AppSpacing.md),
+              Expanded(child: Text(message, style: TextStyle(color: config.foregroundColor))),
+              if (onRetry != null && (type == MessageBannerType.error || type == MessageBannerType.warning))
+                TextButton(onPressed: onRetry, child: Text('Retry', style: TextStyle(color: config.foregroundColor))),
+              if (onDismiss != null)
+                IconButton(onPressed: onDismiss, icon: Icon(Icons.close, color: config.foregroundColor), iconSize: 20),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }
 
@@ -62,9 +82,25 @@ class _BannerStyle {
 
 _BannerStyle _getBannerStyle(MessageBannerType type) {
   return switch (type) {
-    MessageBannerType.error => const _BannerStyle(backgroundColor: Color(0xFFD32F2F), foregroundColor: Colors.white, icon: Icons.error_outline),
-    MessageBannerType.warning => const _BannerStyle(backgroundColor: Color(0xFFF57C00), foregroundColor: Colors.white, icon: Icons.warning_amber_rounded),
-    MessageBannerType.info => const _BannerStyle(backgroundColor: Color(0xFF1976D2), foregroundColor: Colors.white, icon: Icons.info_outline),
-    MessageBannerType.success => const _BannerStyle(backgroundColor: Color(0xFF388E3C), foregroundColor: Colors.white, icon: Icons.check_circle_outline),
+    MessageBannerType.error => const _BannerStyle(
+      backgroundColor: Color(0xFFD32F2F),
+      foregroundColor: Colors.white,
+      icon: Icons.error_outline,
+    ),
+    MessageBannerType.warning => const _BannerStyle(
+      backgroundColor: Color(0xFFF57C00),
+      foregroundColor: Colors.white,
+      icon: Icons.warning_amber_rounded,
+    ),
+    MessageBannerType.info => const _BannerStyle(
+      backgroundColor: Color(0xFF1976D2),
+      foregroundColor: Colors.white,
+      icon: Icons.info_outline,
+    ),
+    MessageBannerType.success => const _BannerStyle(
+      backgroundColor: Color(0xFF388E3C),
+      foregroundColor: Colors.white,
+      icon: Icons.check_circle_outline,
+    ),
   };
 }

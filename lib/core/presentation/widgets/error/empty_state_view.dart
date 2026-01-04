@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:health_duel/core/theme/theme.dart';
 
 /// Empty state widget for lists with no data
 ///
@@ -39,15 +40,31 @@ class EmptyStateView extends StatelessWidget {
 
     return Center(
       child: Padding(
-        padding: const EdgeInsets.all(32),
+        padding: const EdgeInsets.all(AppSpacing.xl),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(icon, size: 80, color: theme.colorScheme.onSurface.withAlpha((255 * 0.3).round())),
-            const SizedBox(height: 24),
-            Text(title, style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600), textAlign: TextAlign.center),
-            if (subtitle != null) ...[const SizedBox(height: 8), Text(subtitle!, style: theme.textTheme.bodyMedium?.copyWith(color: theme.colorScheme.onSurface.withAlpha((255 * 0.6).round())), textAlign: TextAlign.center)],
-            if (action != null && actionLabel != null) ...[const SizedBox(height: 24), FilledButton.tonal(onPressed: action, child: Text(actionLabel!))],
+            const SizedBox(height: AppSpacing.lg),
+            Text(
+              title,
+              style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600),
+              textAlign: TextAlign.center,
+            ),
+            if (subtitle != null) ...[
+              const SizedBox(height: AppSpacing.sm),
+              Text(
+                subtitle!,
+                style: theme.textTheme.bodyMedium?.copyWith(
+                  color: theme.colorScheme.onSurface.withAlpha((255 * 0.6).round()),
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ],
+            if (action != null && actionLabel != null) ...[
+              const SizedBox(height: AppSpacing.lg),
+              FilledButton.tonal(onPressed: action, child: Text(actionLabel!)),
+            ],
           ],
         ),
       ),

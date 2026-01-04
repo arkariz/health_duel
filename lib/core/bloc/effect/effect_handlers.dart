@@ -6,6 +6,7 @@ library;
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:health_duel/core/bloc/bloc.dart';
+import 'package:health_duel/core/theme/theme.dart';
 
 /// Register handlers for navigation, feedback, and dialog effects
 void setupEffectHandlers({EffectRegistry? registry}) {
@@ -58,9 +59,11 @@ void setupEffectHandlers({EffectRegistry? registry}) {
 /// Show snackbar with severity styling
 void _showSnackBar(BuildContext context, String message, FeedbackSeverity severity) {
   final theme = Theme.of(context);
+  final appColors = theme.extension<AppColorsExtension>() ?? AppColorsExtension.light;
+
   final (bg, fg) = switch (severity) {
-    FeedbackSeverity.success => (Colors.green.shade700, Colors.white),
-    FeedbackSeverity.warning => (Colors.orange.shade700, Colors.white),
+    FeedbackSeverity.success => (appColors.success, Colors.white),
+    FeedbackSeverity.warning => (appColors.warning, Colors.white),
     FeedbackSeverity.info => (theme.colorScheme.surfaceContainerHighest, theme.colorScheme.onSurface),
     FeedbackSeverity.error => (theme.colorScheme.error, theme.colorScheme.onError),
   };
@@ -79,7 +82,7 @@ void _showSnackBar(BuildContext context, String message, FeedbackSeverity severi
         content: Row(
           children: [
             Icon(icon, color: fg),
-            const SizedBox(width: 12),
+            const SizedBox(width: AppSpacing.md),
             Expanded(child: Text(message, style: TextStyle(color: fg))),
           ],
         ),
@@ -97,10 +100,15 @@ void _showSnackBar(BuildContext context, String message, FeedbackSeverity severi
     );
 }
 
-Widget _icon(DialogIcon icon) => switch (icon) {
-  DialogIcon.info => const Icon(Icons.info_outline, size: 32),
-  DialogIcon.error => const Icon(Icons.error_outline, size: 32, color: Colors.red),
-  DialogIcon.success => const Icon(Icons.check_circle_outline, size: 32, color: Colors.green),
-  DialogIcon.question => const Icon(Icons.help_outline, size: 32),
-  DialogIcon.warning => Icon(Icons.warning_amber, size: 32, color: Colors.orange.shade700),
-};
+Widget _icon(DialogIcon icon) => Builder(
+  builder: (context) {
+    final appColors = Theme.of(context).extension<AppColorsExtension>() ?? AppColorsExtension.light;
+    return switch (icon) {
+      DialogIcon.info => const Icon(Icons.info_outline, size: 32),
+      DialogIcon.error => Icon(Icons.error_outline, size: 32, color: Theme.of(context).colorScheme.error),
+      DialogIcon.success => Icon(Icons.check_circle_outline, size: 32, color: appColors.success),
+      DialogIcon.question => const Icon(Icons.help_outline, size: 32),
+      DialogIcon.warning => Icon(Icons.warning_amber, size: 32, color: appColors.warning),
+    };
+  },
+);
