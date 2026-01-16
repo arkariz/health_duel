@@ -4,11 +4,11 @@ final class NavigatePushEffect extends NavigationEffect {
   final String route;
   final Object? arguments;
 
-  const NavigatePushEffect({
+  NavigatePushEffect({
     required this.route,
     this.arguments,
   });
 
   @override
-  List<Object?> get props => [route, arguments];
+  List<Object?> get props => [...super.props, route, arguments];
 }

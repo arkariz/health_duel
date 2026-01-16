@@ -93,7 +93,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       (failure) => emit(
         AuthUnauthenticated(effect: ShowSnackBarEffect(message: failure.message, severity: FeedbackSeverity.error)),
       ),
-      (user) => emit(AuthAuthenticated(user, effect: const NavigateGoEffect(route: '/home'))),
+      (user) => emit(AuthAuthenticated(user, effect: NavigateGoEffect(route: '/home'))),
     );
   }
 
@@ -107,7 +107,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       (failure) => emit(
         AuthUnauthenticated(effect: ShowSnackBarEffect(message: failure.message, severity: FeedbackSeverity.error)),
       ),
-      (user) => emit(AuthAuthenticated(user, effect: const NavigateGoEffect(route: '/home'))),
+      (user) => emit(AuthAuthenticated(user, effect: NavigateGoEffect(route: '/home'))),
     );
   }
 
@@ -121,7 +121,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       (failure) => emit(
         AuthUnauthenticated(effect: ShowSnackBarEffect(message: failure.message, severity: FeedbackSeverity.error)),
       ),
-      (user) => emit(AuthAuthenticated(user, effect: const NavigateGoEffect(route: '/home'))),
+      (user) => emit(AuthAuthenticated(user, effect: NavigateGoEffect(route: '/home'))),
     );
   }
 
@@ -138,7 +138,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       (user) => emit(
         AuthAuthenticated(
           user,
-          effect: const ShowSnackBarEffect(
+          effect: ShowSnackBarEffect(
             message: 'Account created successfully!',
             severity: FeedbackSeverity.success,
           ),
@@ -160,7 +160,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       } else {
         emit(AuthUnauthenticated(effect: ShowSnackBarEffect(message: failure.message, severity: FeedbackSeverity.error)));
       }
-    }, (_) => emit(const AuthUnauthenticated(effect: NavigateGoEffect(route: '/login'))));
+    }, (_) => emit(AuthUnauthenticated(effect: NavigateGoEffect(route: '/login'))));
   }
 
   /// Handle auth state changes from Firebase stream

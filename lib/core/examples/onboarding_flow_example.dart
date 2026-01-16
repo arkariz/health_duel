@@ -242,7 +242,7 @@ class OnboardingBloc extends EffectBloc<OnboardingEvent, OnboardingState> {
       emitWithEffect(
         emit,
         state,
-        const ShowSnackBarEffect(
+        ShowSnackBarEffect(
           message: 'Invalid step transition',
           severity: FeedbackSeverity.error,
         ),
@@ -286,7 +286,7 @@ class OnboardingBloc extends EffectBloc<OnboardingEvent, OnboardingState> {
       emitWithEffect(
         emit,
         state,
-        const ShowSnackBarEffect(
+        ShowSnackBarEffect(
           message: 'This step cannot be skipped',
           severity: FeedbackSeverity.warning,
         ),
@@ -336,7 +336,7 @@ class OnboardingBloc extends EffectBloc<OnboardingEvent, OnboardingState> {
     emitWithEffect(
       emit,
       state.copyWith(currentStep: OnboardingStep.complete),
-      const NavigateReplaceEffect(route: '/home'),
+      NavigateReplaceEffect(route: '/home'),
     );
   }
 }

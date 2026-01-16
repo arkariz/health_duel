@@ -11,7 +11,7 @@ final class ShowSnackBarEffect extends FeedbackEffect {
   @override
   final Duration autoDismissDuration;
 
-  const ShowSnackBarEffect({
+  ShowSnackBarEffect({
     required this.message,
     this.severity = FeedbackSeverity.info,
     this.actionLabel,
@@ -24,6 +24,7 @@ final class ShowSnackBarEffect extends FeedbackEffect {
 
   @override
   List<Object?> get props => [
+    ...super.props, // Include timestamp from UiEffect
     message,
     severity,
     actionLabel,

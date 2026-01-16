@@ -5,12 +5,12 @@ final class NavigateGoEffect extends NavigationEffect {
   final Object? arguments;
   final Map<String, String>? queryParameters;
 
-  const NavigateGoEffect({
+  NavigateGoEffect({
     required this.route,
     this.arguments,
     this.queryParameters,
   });
 
   @override
-  List<Object?> get props => [route, arguments, queryParameters];
+  List<Object?> get props => [...super.props, route, arguments, queryParameters];
 }
