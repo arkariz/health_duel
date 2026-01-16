@@ -62,18 +62,9 @@ class HealthPermissionView extends StatelessWidget {
               // Permission button
               FilledButton.icon(
                 onPressed: () => context.read<HealthBloc>().add(const HealthPermissionRequested()),
-                icon: const Icon(Icons.refresh),
-                label: const Text('Try Again'),
-                style: FilledButton.styleFrom(minimumSize: const Size(200, 48)),
-              ),
-
-              
-              const SizedBox(height: AppSpacing.md),
-              OutlinedButton.icon(
-                onPressed: () => context.read<HealthBloc>().add(const HealthSettingsRequested()),
-                icon: const Icon(Icons.settings),
-                label: const Text('Open Settings'),
-                style: OutlinedButton.styleFrom(minimumSize: const Size(200, 48)),
+                icon: const Icon(Icons.health_and_safety),
+                label: const Text('Grant Permission'),
+                style: FilledButton.styleFrom(minimumSize: const Size(250, 48)),
               ),
 
               const SizedBox(height: AppSpacing.lg),
