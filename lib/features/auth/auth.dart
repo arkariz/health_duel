@@ -60,8 +60,8 @@ export 'presentation/bloc/auth_event.dart';
 export 'presentation/bloc/auth_state.dart';
 
 // Pages
-export 'presentation/pages/login_page.dart';
-export 'presentation/pages/register_page.dart';
+export 'presentation/pages/login/login.dart';
+export 'presentation/pages/register/register.dart';
 
 // Widgets
 export 'presentation/widgets/auth_guard.dart';
