@@ -50,6 +50,23 @@ Desktop.ini
 # Generated code
 *.g.dart
 *.freezed.dart
+
 # Environment Variables
 env/
 !env/example.env
+
+# Firebase Credentials
+google-services.json
+GoogleService-Info.plist
+firebase_options.dart
+firebase-debug.log
+
+# Android Signing
+key.properties
+*.jks
+*.keystore
+
+# iOS Signing
+*.mobileprovision
+*.p12
+*.cer
