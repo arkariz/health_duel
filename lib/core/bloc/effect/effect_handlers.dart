@@ -17,8 +17,8 @@ void setupEffectHandlers({EffectRegistry? registry}) {
     ..register<NavigateGoEffect>((context, effect) {
       context.go(
         effect.queryParameters != null
-            ? Uri(path: effect.route, queryParameters: effect.queryParameters).toString()
-            : effect.route,
+          ? Uri(path: effect.route, queryParameters: effect.queryParameters).toString()
+          : effect.route,
         extra: effect.arguments,
       );
     })
@@ -34,26 +34,7 @@ void setupEffectHandlers({EffectRegistry? registry}) {
       _showSnackBar(context, effect.message, effect.severity);
     })
     // Dialog effects
-    ..register<ShowDialogEffect>((context, effect) {
-      showDialog<DialogAction>(
-        context: context,
-        barrierDismissible: effect.isDismissible,
-        builder: (ctx) => AlertDialog(
-          icon: effect.icon != null ? _icon(effect.icon!) : null,
-          title: Text(effect.title),
-          content: Text(effect.message),
-          actions:effect.actions
-          .map((config) => TextButton(
-              style: TextButton.styleFrom(
-                foregroundColor:config.action == DialogAction.destructive ? Theme.of(ctx).colorScheme.error : null,
-              ),
-              onPressed: () => Navigator.of(ctx).pop(config.action),
-              child: Text(config.effectiveLabel),
-            ),
-          ).toList(),
-        ),
-      );
-    });
+    ..register<ShowDialogEffect>((context, effect) => effect.onShow(context));
 }
 
 /// Show snackbar with severity styling
@@ -99,16 +80,3 @@ void _showSnackBar(BuildContext context, String message, FeedbackSeverity severi
       ),
     );
 }
-
-Widget _icon(DialogIcon icon) => Builder(
-  builder: (context) {
-    final appColors = Theme.of(context).extension<AppColorsExtension>() ?? AppColorsExtension.light;
-    return switch (icon) {
-      DialogIcon.info => const Icon(Icons.info_outline, size: 32),
-      DialogIcon.error => Icon(Icons.error_outline, size: 32, color: Theme.of(context).colorScheme.error),
-      DialogIcon.success => Icon(Icons.check_circle_outline, size: 32, color: appColors.success),
-      DialogIcon.question => const Icon(Icons.help_outline, size: 32),
-      DialogIcon.warning => Icon(Icons.warning_amber, size: 32, color: appColors.warning),
-    };
-  },
-);
