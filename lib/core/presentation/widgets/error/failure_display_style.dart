@@ -35,6 +35,9 @@ extension FailureDisplayStyleExtension on Failure {
       CacheFailure() => const FailureDisplayStyle(icon: Icons.storage_rounded, color: Colors.purple, title: 'Storage Error'),
       ValidationFailure() => const FailureDisplayStyle(icon: Icons.warning_amber_rounded, color: Colors.orange, title: 'Validation Error'),
       UnexpectedFailure() => const FailureDisplayStyle(icon: Icons.error_outline_rounded, color: Colors.grey, title: 'Something Went Wrong'),
+      HealthUnavailableFailure() => const FailureDisplayStyle(icon: Icons.health_and_safety_rounded, color: Colors.teal, title: 'Health Data Unavailable'),
+      HealthPermissionFailure() => const FailureDisplayStyle(icon: Icons.health_and_safety_rounded, color: Colors.teal, title: 'Health Permission Required'),
+      HealthNotSupportedFailure() => const FailureDisplayStyle(icon: Icons.health_and_safety_rounded, color: Colors.teal, title: 'Health Not Supported'),
     };
   }
 }

@@ -7,6 +7,7 @@ import 'package:health_duel/data/session/di/session_module.dart';
 import 'package:health_duel/features/auth/di/auth_module.dart';
 import 'package:health_duel/core/config/firebase_options.dart';
 import 'package:health_duel/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:health_duel/features/health/di/health_module.dart';
 import 'package:health_duel/features/home/di/home_module.dart';
 
 /// GetIt instance - Service Locator for Dependency Injection
@@ -52,10 +53,13 @@ Future<void> initializeDependencies() async {
   // Home feature: HomeBloc (depends on auth use cases)
   registerHomeModule(getIt);
 
+  // Health feature: step counting, health permissions (Phase 4)
+  registerHealthModule(getIt);
+
   // 3. Register Router (needs AuthBloc for redirect logic)
   _registerRouter();
 
-  // TODO: Phase 4+ - Register additional feature modules
+  // TODO: Future phases - Register additional feature modules
   // registerDuelsModule();
   // registerProfileModule();
 }

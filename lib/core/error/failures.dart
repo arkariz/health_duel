@@ -84,3 +84,31 @@ class UnexpectedFailure extends Failure {
   @override
   String toString() => 'UnexpectedFailure(message: $message, original: $originalException)';
 }
+
+// ═══════════════════════════════════════════════════════════════════════════
+// HEALTH FAILURES (Phase 4)
+// ═══════════════════════════════════════════════════════════════════════════
+
+/// Health platform unavailable (Health Connect not installed, HealthKit not available)
+class HealthUnavailableFailure extends Failure {
+  const HealthUnavailableFailure({required super.message, super.errorCode});
+
+  @override
+  String toString() => 'HealthUnavailableFailure(message: $message, code: $errorCode)';
+}
+
+/// Health platform not supported by device (older devices, unsupported hardware)
+class HealthNotSupportedFailure extends Failure {
+  const HealthNotSupportedFailure({required super.message, super.errorCode});
+
+  @override
+  String toString() => 'HealthNotSupportedFailure(message: $message, code: $errorCode)';
+}
+
+/// Health permission not granted or denied by user
+class HealthPermissionFailure extends Failure {
+  const HealthPermissionFailure({required super.message, super.errorCode});
+
+  @override
+  String toString() => 'HealthPermissionFailure(message: $message, code: $errorCode)';
+}

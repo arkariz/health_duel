@@ -83,6 +83,9 @@ class ExceptionMapper {
       ValidationFailure() => failure.message,
       AuthFailure() => 'Authentication failed. Please login again.',
       UnexpectedFailure() => 'Something went wrong. Please try again.',
+      HealthUnavailableFailure() => 'Health data is unavailable on this device.',
+      HealthPermissionFailure() => 'Health permissions are required to access this data.',
+      HealthNotSupportedFailure() => "Your device doesn't support health data tracking.",
     };
   }
 }
