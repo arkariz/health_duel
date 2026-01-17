@@ -70,6 +70,10 @@ class HealthPlatformDataSourceImpl implements HealthPlatformDataSource {
   @override
   Future<HealthPermissionStatus> checkPermissions() async {
     try {
+      // Initialize Health Connect (Android)
+      // This is required before any other operations on Android
+      await _health.configure();
+
       // Check Health Connect availability first (Android)
       final isConnectAvailable = await _health.isHealthConnectAvailable();
 
@@ -155,7 +159,7 @@ class HealthPlatformDataSourceImpl implements HealthPlatformDataSource {
 
       // Get source device info (from first data point)
       final sourceDevice = dataPoints.isNotEmpty
-          ? dataPoints.first.sourceName
+          ? dataPoints.first.deviceModel
           : null;
 
       return StepCountRaw(
